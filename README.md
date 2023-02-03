@@ -4,10 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Cách chạy project
 
-Tải crud api
+Truy cập và tải crud api
 
 ```bash
-git clone https://github.com/hiepmv2651/crud_api.git
+https://github.com/hiepmv2651/crud_api
 ```
 
 Clone the project
