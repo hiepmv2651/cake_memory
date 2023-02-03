@@ -1,0 +1,42 @@
+<div class="tw-max-w-3xl tw-mx-auto">
+  <section
+    class="tw-p-6 tw-my-12 tw-scroll-mt-16 widescreen:section-min-height tallscreen:section-min-height"
+  >
+    <h2
+      class="tw-text-4xl tw-font-bold tw-text-center sm:tw-text-5xl tw-mb-6 tw-text-slate-900 dark:tw-text-white"
+    >
+      Contact Us
+    </h2>
+    <form
+      action=""
+      class="tw-max-w-4xl tw-mx-auto tw-text-2xl sm:tw-text-3xl tw-flex tw-flex-col tw-items-left tw-gap-4"
+    >
+      <label for="subject">Subject:</label>
+      <input
+        type="text"
+        id="subject"
+        name="subject"
+        required
+        minlength="3"
+        maxlength="60"
+        placeholder="Your Subject"
+        class="tw-w-full tw-text-black tw-text-2xl sm:tw-text-3xl tw-p-3 tw-rounded-xl tw-border tw-border-solid tw-border-slate-900 dark:tw-border-none"
+      />
+      <label for="message">Message:</label>
+      <textarea
+        name="message"
+        id="message"
+        cols="30"
+        rows="10"
+        placeholder="Your Message"
+        required
+        class="tw-w-full tw-text-black tw-text-2xl sm:tw-text-3xl tw-p-3 tw-rounded-xl tw-border tw-border-solid tw-border-slate-900 dark:tw-border-none"
+      ></textarea>
+      <button
+        class="tw-bg-teal-700 hover:tw-bg-teal-600 active:tw-bg-teal-500 tw-text-white tw-p-3 tw-w-48 tw-rounded-xl tw-border tw-border-solid tw-border-slate-900 dark:tw-border-none"
+      >
+        Submit
+      </button>
+    </form>
+  </section>
+</div>

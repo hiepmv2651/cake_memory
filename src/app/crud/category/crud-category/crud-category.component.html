@@ -1,0 +1,47 @@
+<p-dialog
+  header="{{ modalType }} Loại Bánh"
+  [(visible)]="displayAddEditModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeModal()"
+>
+  <form action="" [formGroup]="categoryForm" class="product-form">
+    <div class="field">
+      <label class="block" for="name">Tên Loại Bánh</label>
+      <input type="text" pInputText id="name" formControlName="name" />
+      <small
+        class="p-error block"
+        *ngIf="
+          categoryForm.controls['name'].invalid &&
+          categoryForm.controls['name'].dirty
+        "
+        >Field is required</small
+      >
+
+      <div
+        *ngIf="error?.name"
+        class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+        role="alert"
+      >
+        <span class="tw-font-medium"></span> {{ error.name }}
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="closeModal()"
+      label="Hủy"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="addEditProduct()"
+      label="{{ modalType }}"
+      [loading]="categoryForm.invalid"
+    ></p-button>
+  </ng-template>
+</p-dialog>

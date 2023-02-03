@@ -1,0 +1,172 @@
+<p-dialog
+  header="{{ modalType }} Sản Phẩm"
+  [(visible)]="displayAddEditModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeModal()"
+>
+  <form [formGroup]="productForm" class="product-form">
+    <div class="field">
+      <label class="block" for="name">Tên Bánh</label>
+      <input
+        type="text"
+        class="rounded"
+        pInputText
+        id="name"
+        formControlName="name"
+      />
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls['name'].invalid &&
+          productForm.controls['name'].dirty
+        "
+        >Field is required</small
+      >
+
+      <div
+        *ngIf="error?.name"
+        class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+        role="alert"
+      >
+        <span class="tw-font-medium"></span> {{ error.name }}
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="block" for="price">Số Lượng</label>
+      <p-inputNumber
+        id="quantity"
+        formControlName="quantity"
+        class="block"
+      ></p-inputNumber>
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls['quantity'].invalid &&
+          productForm.controls['quantity'].dirty
+        "
+        >Field is required</small
+      >
+
+      <div
+        *ngIf="error?.quantity"
+        class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+        role="alert"
+      >
+        <span class="tw-font-medium"></span> {{ error.quantity }}
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="block" for="price">Giá</label>
+      <p-inputNumber
+        id="price"
+        formControlName="price"
+        class="block"
+      ></p-inputNumber>
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls['price'].invalid &&
+          productForm.controls['price'].dirty
+        "
+        >Field is required</small
+      >
+
+      <div
+        *ngIf="error?.price"
+        class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+        role="alert"
+      >
+        <span class="tw-font-medium"></span> {{ error.price }}
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="block" for="image">Ảnh</label>
+      <input
+        type="text"
+        class="rounded"
+        pInputText
+        id="name"
+        formControlName="image"
+      />
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls['image'].invalid &&
+          productForm.controls['image'].dirty
+        "
+        >Field is required</small
+      >
+
+      <div
+        *ngIf="error?.image"
+        class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+        role="alert"
+      >
+        <span class="tw-font-medium"></span> {{ error.image }}
+      </div>
+    </div>
+    <div class="field">
+      <label class="block" for="category">Loại Bánh</label>
+
+      <select
+        class="tw-bg-white tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-blue-500 focus:tw-border-blue-500 tw-block tw-w-1/2 tw-p-2.5"
+        formControlName="category_id"
+      >
+        <option selected>Chọn Loại Bánh</option>
+        <option [value]="item.id" *ngFor="let item of categories">
+          {{ item.name }}
+        </option>
+      </select>
+
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls['category_id'].invalid &&
+          productForm.controls['category_id'].dirty
+        "
+        >Field is required</small
+      >
+
+      <div
+        *ngIf="error?.category_id"
+        class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+        role="alert"
+      >
+        <span class="tw-font-medium"></span> {{ error.category_id }}
+      </div>
+    </div>
+    <div class="field">
+      <label class="block">Mô Tả</label>
+      <textarea pInputTextarea formControlName="detail"></textarea>
+    </div>
+
+    <div
+      *ngIf="error?.detail"
+      class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+      role="alert"
+    >
+      <span class="tw-font-medium"></span> {{ error.detail }}
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="closeModal()"
+      label="Cancel"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="submitForm()"
+      label="{{ modalType }}"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+<!-- [loading]="productForm.invalid" -->

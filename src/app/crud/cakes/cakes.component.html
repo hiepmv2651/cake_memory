@@ -1,0 +1,134 @@
+<div class="flex justify-content-between">
+  <h2>Sản Phẩm</h2>
+  <div class="tw-flex tw-gap-3">
+    <p-button (click)="export()">Excel</p-button>
+    <p-button label="Thêm Bánh" (click)="showAddModal()"></p-button>
+  </div>
+</div>
+
+<p-table
+  #dt
+  [value]="$any(products$ | async)"
+  [paginator]="true"
+  [rows]="5"
+  [rowsPerPageOptions]="[5, 10, 25, 50]"
+  [globalFilterFields]="['name', 'price', 'category_name']"
+  [filterDelay]="0"
+  [showCurrentPageReport]="true"
+  [loading]="$any(isLoading$ | async)"
+  currentPageReportTemplate="Hiển thị {first} tới {last} trong {totalRecords} mục"
+  [rowHover]="true"
+>
+  <ng-template pTemplate="caption">
+    <div class="table-header">
+      Danh Sách Sản Phẩm
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+          placeholder="Tìm kiếm toàn bộ"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <th pSortableColumn="name">
+        Tên Bánh <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="price">
+        Giá <p-sortIcon field="price"></p-sortIcon>
+      </th>
+      <th pSortableColumn="category_name">
+        Loại Bánh<p-sortIcon field="category_name"></p-sortIcon>
+      </th>
+      <th>Ảnh</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filter($any($event.target).value, 'name', 'contains')"
+          placeholder="Tìm tên bánh"
+          class="p-column-filter"
+        />
+      </th>
+
+      <th>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filter($any($event.target).value, 'price', 'contains')"
+          placeholder="Tìm giá bánh"
+          class="p-column-filter"
+        />
+      </th>
+
+      <th>
+        <input
+          pInputText
+          type="text"
+          (input)="
+            dt.filter($any($event.target).value, 'category_name', 'contains')
+          "
+          placeholder="Tìm loại bánh"
+          class="p-column-filter"
+        />
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td>
+        <p-tableCheckbox [value]="product"></p-tableCheckbox>
+      </td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price | currency : "USD" }}</td>
+      <td>{{ product.category_name }}</td>
+      <td>
+        <img src="{{ product.image }}" height="50px" width="50px" alt="" />
+      </td>
+      <td>
+        <button
+          pButton
+          icon="pi pi-pencil"
+          class="p-button-rounded p-button-success mr-2"
+          (click)="showEditModal(product)"
+        ></button>
+        <button
+          pButton
+          icon="pi pi-trash"
+          class="p-button-rounded p-button-warning"
+          (click)="deleteProduct(product)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No customers found.</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<app-crud-cake
+  [displayAddEditModal]="displayAddEditModal"
+  (clickClose)="hideAddModal($event)"
+  [selectedProduct]="selectedProduct"
+></app-crud-cake>
+
+<p-confirmDialog
+  header="Delete"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>
+<p-toast position="bottom-right"></p-toast>

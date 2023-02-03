@@ -1,0 +1,175 @@
+<div
+  class="surface-ground flex align-items-center justify-content-center min-h-screen overflow-hidden"
+>
+  <div class="flex flex-column align-items-center justify-content-center m-5">
+    <div
+      style="
+        border-radius: 56px;
+        padding: 0.3rem;
+        background: linear-gradient(
+          180deg,
+          var(--primary-color) 10%,
+          rgba(33, 150, 243, 0) 30%
+        );
+      "
+    >
+      <div
+        class="w-full surface-card py-8 px-5 sm:px-8"
+        style="border-radius: 53px"
+      >
+        <div class="text-center mb-5">
+          <div class="text-900 text-3xl font-medium mb-3">
+            Chào mừng đến Cake Memory
+          </div>
+          <span class="text-600 font-medium">Đăng kí để tiếp tục</span>
+        </div>
+
+        <form [formGroup]="registerForm">
+          <label for="name" class="block text-900 text-xl font-medium mb-2"
+            >Tên</label
+          >
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            placeholder="Tên"
+            pInputText
+            class="w-full md:w-30rem mb-3"
+            style="padding: 1rem"
+          />
+
+          <div
+            *ngIf="error?.name"
+            class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+            role="alert"
+          >
+            <span class="tw-font-medium"></span> {{ error.name }}
+          </div>
+
+          <label for="email1" class="block text-900 text-xl font-medium mb-2"
+            >Email</label
+          >
+          <input
+            id="email1"
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+            pInputText
+            class="w-full md:w-30rem mb-3"
+            style="padding: 1rem"
+          />
+
+          <div
+            *ngIf="error?.email"
+            class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+            role="alert"
+          >
+            <span class="tw-font-medium"></span> {{ error.email }}
+          </div>
+
+          <label for="address" class="block text-900 text-xl font-medium mb-2"
+            >Địa Chỉ</label
+          >
+          <input
+            id="address"
+            type="text"
+            formControlName="address"
+            placeholder="Địa Chỉ"
+            pInputText
+            class="w-full md:w-30rem mb-3"
+            style="padding: 1rem"
+          />
+
+          <div
+            *ngIf="error?.address"
+            class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+            role="alert"
+          >
+            <span class="tw-font-medium"></span> {{ error.address }}
+          </div>
+
+          <label for="phone" class="block text-900 text-xl font-medium mb-2"
+            >SĐT</label
+          >
+          <input
+            id="phone"
+            type="text"
+            formControlName="phone"
+            placeholder="SĐT"
+            pInputText
+            class="w-full md:w-30rem mb-3"
+            style="padding: 1rem"
+          />
+
+          <div
+            *ngIf="error?.phone"
+            class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+            role="alert"
+          >
+            <span class="tw-font-medium"></span> {{ error.phone }}
+          </div>
+
+          <label for="gender" class="block text-900 text-xl font-medium mb-2"
+            >Giới Tính</label
+          >
+          <input
+            id="gender"
+            type="text"
+            formControlName="gender"
+            placeholder="Giới Tính"
+            pInputText
+            class="w-full md:w-30rem mb-3"
+            style="padding: 1rem"
+          />
+
+          <div
+            *ngIf="error?.gender"
+            class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+            role="alert"
+          >
+            <span class="tw-font-medium"></span> {{ error.gender }}
+          </div>
+
+          <label for="password1" class="block text-900 font-medium text-xl mb-2"
+            >Password</label
+          >
+          <p-password
+            id="password1"
+            formControlName="password"
+            placeholder="Password"
+            [toggleMask]="true"
+            styleClass="mb-3"
+            inputStyleClass="w-full p-3 md:w-30rem"
+          ></p-password>
+
+          <label for="password1" class="block text-900 font-medium text-xl mb-2"
+            >Nhập lại mật khẩu</label
+          >
+          <p-password
+            id="password1"
+            formControlName="password_confirmation"
+            placeholder="Password"
+            styleClass="mb-3"
+            inputStyleClass="w-full p-3 md:w-30rem"
+          ></p-password>
+
+          <div
+            *ngIf="error?.password"
+            class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+            role="alert"
+          >
+            <span class="tw-font-medium"></span> {{ error.password }}
+          </div>
+
+          <button
+            pButton
+            pRipple
+            label="Đăng Kí"
+            class="w-full p-3 text-xl flex mt-5"
+            (click)="click()"
+          ></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="flex justify-content-between">
+  <h2>Khách Hàng</h2>
+  <div class="tw-flex tw-gap-3">
+    <p-button (click)="export()">Excel</p-button>
+  </div>
+</div>
+
+<p-table
+  #dt
+  [value]="users"
+  [paginator]="true"
+  [rows]="5"
+  [rowsPerPageOptions]="[5, 10, 25, 50]"
+  [globalFilterFields]="['name', 'email', 'address', 'phone', 'gender']"
+  [filterDelay]="0"
+  [showCurrentPageReport]="true"
+  [loading]="loading"
+  currentPageReportTemplate="Hiển thị {first} tới {last} trong {totalRecords} mục"
+  [rowHover]="true"
+>
+  <ng-template pTemplate="caption">
+    <div class="table-header">
+      Danh Sách User
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+          placeholder="Tìm kiếm toàn bộ"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <th pSortableColumn="name">
+        Tên User <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="email">
+        Email <p-sortIcon field="email"></p-sortIcon>
+      </th>
+      <th pSortableColumn="address">
+        Địa Chỉ<p-sortIcon field="address"></p-sortIcon>
+      </th>
+      <th pSortableColumn="phone">
+        SĐT<p-sortIcon field="phone"></p-sortIcon>
+      </th>
+      <th pSortableColumn="gender">
+        Giới Tính<p-sortIcon field="gender"></p-sortIcon>
+      </th>
+
+      <th></th>
+    </tr>
+    <tr>
+      <th>
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filter($any($event.target).value, 'name', 'contains')"
+          placeholder="Tìm khách hàng"
+          class="p-column-filter"
+        />
+      </th>
+
+      <th>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filter($any($event.target).value, 'email', 'contains')"
+          placeholder="Tìm email"
+          class="p-column-filter"
+        />
+      </th>
+
+      <th>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filter($any($event.target).value, 'address', 'contains')"
+          placeholder="Tìm địa chỉ"
+          class="p-column-filter"
+        />
+      </th>
+      <th>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filter($any($event.target).value, 'phone', 'contains')"
+          placeholder="Tìm SĐT"
+          class="p-column-filter"
+        />
+      </th>
+      <th>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filter($any($event.target).value, 'gender', 'contains')"
+          placeholder="Giới Tính"
+          class="p-column-filter"
+        />
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td>
+        <p-tableCheckbox [value]="product"></p-tableCheckbox>
+      </td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.email }}</td>
+      <td>{{ product.address }}</td>
+      <td>{{ product.phone }}</td>
+      <td>{{ product.gender }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No customers found.</td>
+    </tr>
+  </ng-template>
+</p-table>
