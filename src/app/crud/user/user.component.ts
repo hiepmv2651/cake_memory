@@ -12,16 +12,14 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent {
+  fileUploadForm!: FormGroup;
+  fileInputLabel!: string;
+
   users: User[] = [];
 
   loading: boolean = true;
 
   SERVER_URL = 'http://127.0.0.1:8000/api/importUser';
-  uploadForm!: FormGroup;
-
-  import: any = {
-    file: null,
-  };
 
   @ViewChild('dt') table!: Table;
 
@@ -29,11 +27,11 @@ export class UserComponent {
     private userSerVice: UserService,
     private exportService: ExportService,
     private formBuilder: FormBuilder,
-    private httpClient: HttpClient
+    private http: HttpClient
   ) {}
   ngOnInit(): void {
     this.getUserList();
-    this.uploadForm = this.formBuilder.group({
+    this.fileUploadForm = this.formBuilder.group({
       file: [''],
     });
   }
@@ -54,5 +52,31 @@ export class UserComponent {
       a.href = window.URL.createObjectURL(blob);
       a.click();
     });
+  }
+
+  onFileSelect(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      // console.log(file);
+
+      this.fileInputLabel = file.name;
+      this.fileUploadForm.get('file')?.setValue(file);
+    }
+  }
+
+  onFormSubmit() {
+    const formData = new FormData();
+    formData.append('file', this.fileUploadForm.get('file')?.value);
+    formData.append('agentId', '007');
+
+    this.http.post<any>(this.SERVER_URL, formData).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.getUserList();
   }
 }

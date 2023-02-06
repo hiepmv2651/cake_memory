@@ -17,7 +17,7 @@ export class LoginComponent {
     private messageService: MessageService,
     private router: Router
   ) {}
-
+  name = this.userService.userName;
   token!: any;
 
   error!: any;
@@ -34,6 +34,8 @@ export class LoginComponent {
         this.token = data;
         localStorage.setItem('token', this.token.token);
         localStorage.setItem('id', this.token.id);
+        localStorage.setItem('name', this.token.name);
+        this.name.next(this.token.name);
         this.router.navigate(['/']);
       },
       (error) => {

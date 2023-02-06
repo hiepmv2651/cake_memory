@@ -1,129 +1,106 @@
-<nav
-  class="tw-bg-white tw-border-gray-200 tw-px-2 sm:tw-px-4 tw-py-2.5 tw-rounded dark:tw-bg-gray-900"
->
-  <div
-    class="tw-container tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-mx-auto"
-  >
+<nav class="tw-bg-white tw-border-gray-200 tw-px-2 sm:tw-px-4 tw-py-2.5 tw-rounded dark:tw-bg-gray-900">
+  <div class="tw-container tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-mx-auto">
     <div class="tw-flex tw-items-center">
-      <button
-        *ngIf="isLogin$ | async"
-        pButton
-        type="button"
-        (click)="visibleSidebar1 = true"
-        icon="pi pi-bars"
-        class="p-button-text"
-      ></button>
+      <button *ngIf="isLogin$ | async" pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-bars"
+        class="p-button-text"></button>
       <a routerLink="">
-        <span
-          class="tw-self-center tw-text-xl tw-font-semibold tw-whitespace-nowrap dark:tw-text-white"
-          >🍰 Cake Shop</span
-        >
+        <span class="tw-self-center tw-text-xl tw-font-semibold tw-whitespace-nowrap dark:tw-text-white">🍰 Cake
+          Shop</span>
       </a>
     </div>
-    <button
-      data-collapse-toggle="navbar-default"
-      type="button"
+    <button data-collapse-toggle="navbar-default" type="button"
       class="tw-inline-flex tw-items-center tw-p-2 tw-ml-3 tw-text-sm tw-text-gray-500 tw-rounded-lg md:tw-hidden hover:tw-bg-gray-100 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-gray-200 dark:tw-text-gray-400 dark:hover:tw-bg-gray-700 dark:focus:tw-ring-gray-600"
-      aria-controls="navbar-default"
-      aria-expanded="false"
-    >
+      aria-controls="navbar-default" aria-expanded="false">
       <span class="tw-sr-only">Open main menu</span>
-      <svg
-        class="tw-w-6 tw-h-6"
-        aria-hidden="true"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
+      <svg class="tw-w-6 tw-h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
           d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-          clip-rule="evenodd"
-        ></path>
+          clip-rule="evenodd"></path>
       </svg>
     </button>
-    <div
-      class="tw-hidden tw-w-full md:tw-block md:tw-w-auto tw-mx-auto"
-      id="navbar-default"
-    >
+    <div class="tw-hidden tw-w-full md:tw-block md:tw-w-auto tw-mx-auto" id="navbar-default">
       <ul
-        class="tw-flex tw-flex-col tw-p-4 tw-mt-4 tw-border tw-border-gray-100 tw-rounded-lg tw-bg-gray-50 md:tw-flex-row md:tw-space-x-8 md:tw-mt-0 md:tw-text-sm md:tw-font-medium md:tw-border-0 md:tw-bg-white dark:tw-bg-gray-800 md:dark:tw-bg-gray-900 dark:tw-border-gray-700"
-      >
+        class="tw-flex tw-flex-col tw-p-4 tw-mt-4 tw-border tw-border-gray-100 tw-rounded-lg tw-bg-gray-50 md:tw-flex-row md:tw-space-x-8 md:tw-mt-0 md:tw-text-sm md:tw-font-medium md:tw-border-0 md:tw-bg-white dark:tw-bg-gray-800 md:dark:tw-bg-gray-900 dark:tw-border-gray-700">
         <li>
-          <a
-            routerLink=""
+          <a routerLink=""
             class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-white tw-bg-blue-700 tw-rounded md:tw-bg-transparent md:tw-text-blue-700 md:tw-p-0 dark:tw-text-white"
-            aria-current="page"
-            >Trang Chủ</a
-          >
+            aria-current="page">Trang Chủ</a>
         </li>
         <li>
-          <a
-            routerLink="products"
-            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-gray-700 tw-rounded hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:tw-border-0 md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-gray-400 md:dark:hover:tw-text-white dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent"
-            >Bánh</a
-          >
+          <a routerLink="products"
+            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-gray-700 tw-rounded hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:tw-border-0 md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-gray-400 md:dark:hover:tw-text-white dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent">Bánh</a>
         </li>
         <li>
-          <a
-            routerLink="about"
-            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-gray-700 tw-rounded hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:tw-border-0 md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-gray-400 md:dark:hover:tw-text-white dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent"
-            >Về Chúng Tôi</a
-          >
+          <a routerLink="about"
+            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-gray-700 tw-rounded hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:tw-border-0 md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-gray-400 md:dark:hover:tw-text-white dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent">Về
+            Chúng Tôi</a>
         </li>
         <li>
-          <a
-            routerLink="contact"
-            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-gray-700 tw-rounded hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:tw-border-0 md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-gray-400 md:dark:hover:tw-text-white dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent"
-            >Liên Hệ
+          <a routerLink="contact"
+            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-gray-700 tw-rounded hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:tw-border-0 md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-gray-400 md:dark:hover:tw-text-white dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent">Liên
+            Hệ
           </a>
         </li>
       </ul>
     </div>
 
-    <div class="tw-hidden tw-w-full md:tw-block md:tw-w-auto">
-      <ul
-        *ngIf="!(isLogin$ | async); else signout"
-        class="tw-flex tw-flex-col tw-p-4 tw-mt-4 tw-border tw-border-gray-100 tw-rounded-lg tw-bg-gray-50 md:tw-flex-row md:tw-space-x-8 md:tw-mt-0 md:tw-text-sm md:tw-font-medium md:tw-border-0 md:tw-bg-white dark:tw-bg-gray-800 md:dark:tw-bg-gray-900 dark:tw-border-gray-700"
-      >
-        <li>
-          <a
-            routerLink="login"
-            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-white tw-bg-blue-700 tw-rounded md:tw-bg-transparent md:tw-text-blue-700 md:tw-p-0 dark:tw-text-white"
-            aria-current="page"
-          >
-            <i class="pi pi-sign-in"></i>
-            Đăng Nhập</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="register"
-            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-white tw-bg-orange-700 tw-rounded md:tw-bg-transparent md:tw-text-orange-700 md:tw-p-0 dark:tw-text-white"
-            aria-current="page"
-          >
-            <i class="pi pi-file-import"></i> Đăng Kí</a
-          >
-        </li>
-      </ul>
-      <ng-template #signout>
-        <ul>
-          <li>
-            <button
-              (click)="logout()"
-              class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-white tw-bg-blue-700 tw-rounded md:tw-bg-transparent md:tw-text-blue-700 md:tw-p-0 dark:tw-text-white"
-              aria-current="page"
-            >
-              <i class="pi pi-sign-in"></i>
-              Đăng Xuất
-            </button>
+    <div class="tw-cursor-pointer" (click)="profile()">
+      {{ name | async }}
+      <div *ngIf="displayProfile"
+        class="tw-absolute tw-w-40 tw-px-5 tw-py-3 dark:tw-bg-gray-800 tw-bg-white tw-rounded-lg tw-shadow tw-border dark:tw-border-transparent tw-mt-5">
+        <ul class="tw-space-y-3 dark:tw-text-white">
+          <li class="tw-font-medium">
+            <a routerLink="profile"
+              class="tw-flex tw-items-center tw-transform tw-transition-colors tw-duration-200 tw-border-r-4 tw-border-transparent hover:tw-border-indigo-700">
+              <div class="tw-mr-3">
+                <svg class="tw-w-6 tw-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+              </div>
+              Account
+            </a>
+          </li>
+
+          <hr class="dark:tw-border-gray-700" />
+          <li class="tw-font-medium">
+            <a (click)="logout()"
+              class="tw-flex tw-items-center tw-transform tw-transition-colors tw-duration-200 tw-border-r-4 tw-border-transparent hover:tw-border-red-600">
+              <div class="tw-mr-3 tw-text-red-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                  </path>
+                </svg>
+              </div>
+              Đăng xuất
+            </a>
           </li>
         </ul>
-      </ng-template>
+      </div>
+    </div>
+
+    <div class="tw-hidden tw-w-full tw-ml-3 md:tw-block md:tw-w-auto">
+      <ul *ngIf="!(isLogin$ | async)"
+        class="tw-flex tw-flex-col tw-p-4 tw-mt-4 tw-border tw-border-gray-100 tw-rounded-lg tw-bg-gray-50 md:tw-flex-row md:tw-space-x-8 md:tw-mt-0 md:tw-text-sm md:tw-font-medium md:tw-border-0 md:tw-bg-white dark:tw-bg-gray-800 md:dark:tw-bg-gray-900 dark:tw-border-gray-700">
+        <li>
+          <a routerLink="login"
+            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-white tw-bg-blue-700 tw-rounded md:tw-bg-transparent md:tw-text-blue-700 md:tw-p-0 dark:tw-text-white"
+            aria-current="page">
+            <i class="pi pi-sign-in"></i>
+            Đăng Nhập</a>
+        </li>
+        <li>
+          <a routerLink="register"
+            class="tw-block tw-py-2 tw-pl-3 tw-pr-4 tw-text-white tw-bg-orange-700 tw-rounded md:tw-bg-transparent md:tw-text-orange-700 md:tw-p-0 dark:tw-text-white"
+            aria-current="page">
+            <i class="pi pi-file-import"></i> Đăng Kí</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
-<app-sidebar
-  [visibleSidebar1]="visibleSidebar1"
-  (clickClose)="clickClose()"
-></app-sidebar>
+<app-sidebar [visibleSidebar1]="visibleSidebar1" (clickClose)="clickClose()"></app-sidebar>

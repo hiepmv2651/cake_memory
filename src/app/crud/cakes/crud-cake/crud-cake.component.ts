@@ -31,7 +31,7 @@ export class CrudCakeComponent {
 
   categories!: Category[];
 
-  productForm = this.fb.group({
+  productForm: any = this.fb.group({
     name: ['', Validators.required],
     price: [0, Validators.required],
     detail: [''],
@@ -76,12 +76,20 @@ export class CrudCakeComponent {
     this.error$ = undefined;
     this.error = undefined;
 
+    const formData = new FormData();
+    formData.append('image', this.productForm.get('image').value);
+    formData.append('name', this.productForm.get('name').value);
+    formData.append('price', this.productForm.get('price').value);
+    formData.append('detail', this.productForm.get('detail').value);
+    formData.append('category_id', this.productForm.get('category_id').value);
+    formData.append('quantity', this.productForm.get('quantity').value);
+
     if (this.modalType === 'Thêm') {
-      this.store.dispatch(addCake({ payload: this.productForm.value }));
+      this.store.dispatch(addCake({ payload: formData }));
     } else {
       this.store.dispatch(
         updateCake({
-          payload: this.productForm.value,
+          payload: formData,
           id: this.selectedProduct.id,
         })
       );
@@ -120,5 +128,12 @@ export class CrudCakeComponent {
         });
       }
     }, 500);
+  }
+
+  onFileSelect(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.productForm.get('image')?.setValue(file);
+    }
   }
 }

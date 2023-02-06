@@ -9,6 +9,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  displayProfile: boolean = false;
+
+  name = this.userService.userName;
   public isLogin$ = this.userService.loggedIn.asObservable();
   constructor(private userService: UserService, private route: Router) {}
 
@@ -17,6 +20,7 @@ export class NavbarComponent implements OnInit {
   visibleSidebar1: any;
 
   logout() {
+    this.name.next('');
     this.userService.logoutUser().subscribe((data) => {
       localStorage.clear();
     });
@@ -25,5 +29,9 @@ export class NavbarComponent implements OnInit {
 
   clickClose() {
     this.visibleSidebar1 = false;
+  }
+
+  profile() {
+    this.displayProfile = !this.displayProfile;
   }
 }

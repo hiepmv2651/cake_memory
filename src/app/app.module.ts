@@ -57,6 +57,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CartEffect } from './crud/cart/cart.effect';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { CartEffect } from './crud/cart/cart.effect';
     LoginComponent,
     RegisterComponent,
     MycartComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { ProfileComponent } from './pages/profile/profile.component';
 import { MycartComponent } from './pages/mycart/mycart.component';
 import { Auth2Guard } from './auth/auth2.guard';
 import { AuthGuard } from './auth/auth.guard';
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'my-cart', component: MycartComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [Auth2Guard] },
   { path: 'register', component: RegisterComponent, canActivate: [Auth2Guard] },
 ];

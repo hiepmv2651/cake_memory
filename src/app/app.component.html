@@ -1,14 +1,18 @@
-<body
-  class="tw-min-h-screen tw-bg-slate-50 dark:tw-bg-black dark:tw-text-white"
->
+<body class="tw-min-h-screen tw-bg-slate-50 dark:tw-bg-black dark:tw-text-white">
   <app-navbar></app-navbar>
-  <main
-    class="tw-max-w-6xl tw-mx-auto"
-    [style]="{ 'margin-bottom': '2em', 'margin-top': '2em' }"
-  >
+  <main class="tw-max-w-6xl tw-mx-auto" [style]="{ 'margin-bottom': '2em', 'margin-top': '2em' }">
     <router-outlet></router-outlet>
   </main>
   <app-footer></app-footer>
 </body>
-
-<!-- <app-test123></app-test123> -->
+<!-- <h1>Angular 15 FormData (multipart/data-form) Example</h1>
+<div>
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <div>
+      <input type="file" name="profile" (change)="onFileSelect($event)" />
+    </div>
+    <div>
+      <button type="submit">Upload</button>
+    </div>
+  </form>
+</div> -->

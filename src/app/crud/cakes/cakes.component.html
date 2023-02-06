@@ -6,30 +6,17 @@
   </div>
 </div>
 
-<p-table
-  #dt
-  [value]="$any(products$ | async)"
-  [paginator]="true"
-  [rows]="5"
-  [rowsPerPageOptions]="[5, 10, 25, 50]"
-  [globalFilterFields]="['name', 'price', 'category_name']"
-  [filterDelay]="0"
-  [showCurrentPageReport]="true"
-  [loading]="$any(isLoading$ | async)"
-  currentPageReportTemplate="Hiển thị {first} tới {last} trong {totalRecords} mục"
-  [rowHover]="true"
->
+<p-table #dt [value]="$any(products$ | async)" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25, 50]"
+  [globalFilterFields]="['name', 'price', 'category_name']" [filterDelay]="0" [showCurrentPageReport]="true"
+  [loading]="$any(isLoading$ | async)" currentPageReportTemplate="Hiển thị {first} tới {last} trong {totalRecords} mục"
+  [rowHover]="true">
   <ng-template pTemplate="caption">
     <div class="table-header">
       Danh Sách Sản Phẩm
       <span class="p-input-icon-right">
         <i class="pi pi-search"></i>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-          placeholder="Tìm kiếm toàn bộ"
-        />
+        <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+          placeholder="Tìm kiếm toàn bộ" />
       </span>
     </div>
   </ng-template>
@@ -53,35 +40,19 @@
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'name', 'contains')"
-          placeholder="Tìm tên bánh"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'name', 'contains')"
+          placeholder="Tìm tên bánh" class="p-column-filter" />
       </th>
 
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'price', 'contains')"
-          placeholder="Tìm giá bánh"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'price', 'contains')"
+          placeholder="Tìm giá bánh" class="p-column-filter" />
       </th>
 
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="
+        <input pInputText type="text" (input)="
             dt.filter($any($event.target).value, 'category_name', 'contains')
-          "
-          placeholder="Tìm loại bánh"
-          class="p-column-filter"
-        />
+          " placeholder="Tìm loại bánh" class="p-column-filter" />
       </th>
       <th></th>
       <th></th>
@@ -96,21 +67,13 @@
       <td>{{ product.price | currency : "USD" }}</td>
       <td>{{ product.category_name }}</td>
       <td>
-        <img src="{{ product.image }}" height="50px" width="50px" alt="" />
+        <img src="http://127.0.0.1:8000/storage/{{ product.image }}" height="50px" width="50px" alt="" />
       </td>
       <td>
-        <button
-          pButton
-          icon="pi pi-pencil"
-          class="p-button-rounded p-button-success mr-2"
-          (click)="showEditModal(product)"
-        ></button>
-        <button
-          pButton
-          icon="pi pi-trash"
-          class="p-button-rounded p-button-warning"
-          (click)="deleteProduct(product)"
-        ></button>
+        <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+          (click)="showEditModal(product)"></button>
+        <button pButton icon="pi pi-trash" class="p-button-rounded p-button-warning"
+          (click)="deleteProduct(product)"></button>
       </td>
     </tr>
   </ng-template>
@@ -121,14 +84,8 @@
   </ng-template>
 </p-table>
 
-<app-crud-cake
-  [displayAddEditModal]="displayAddEditModal"
-  (clickClose)="hideAddModal($event)"
-  [selectedProduct]="selectedProduct"
-></app-crud-cake>
+<app-crud-cake [displayAddEditModal]="displayAddEditModal" (clickClose)="hideAddModal($event)"
+  [selectedProduct]="selectedProduct"></app-crud-cake>
 
-<p-confirmDialog
-  header="Delete"
-  icon="pi pi-exclamation-triangle"
-></p-confirmDialog>
+<p-confirmDialog header="Delete" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <p-toast position="bottom-right"></p-toast>

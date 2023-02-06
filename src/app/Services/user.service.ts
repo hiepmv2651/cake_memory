@@ -16,6 +16,10 @@ export class UserService {
     localStorage.getItem('token') ? true : false
   );
 
+  userName: BehaviorSubject<string> = new BehaviorSubject<string>(
+    localStorage.getItem('name') ? localStorage.getItem('name')! : ''
+  );
+
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {

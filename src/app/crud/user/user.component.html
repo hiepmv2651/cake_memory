@@ -5,30 +5,37 @@
   </div>
 </div>
 
-<p-table
-  #dt
-  [value]="users"
-  [paginator]="true"
-  [rows]="5"
-  [rowsPerPageOptions]="[5, 10, 25, 50]"
-  [globalFilterFields]="['name', 'email', 'address', 'phone', 'gender']"
-  [filterDelay]="0"
-  [showCurrentPageReport]="true"
-  [loading]="loading"
-  currentPageReportTemplate="Hiển thị {first} tới {last} trong {totalRecords} mục"
-  [rowHover]="true"
->
+<h3>Upload File</h3>
+
+<form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+  <div class="tw-flex tw-flex-wrap ">
+    <div class="sm:tw-w-1/2 tw-pr-4 tw-pl-4 tw-text-center">
+
+      <div class="tw-custom-file">
+        <input type="file" class="tw-custom-file-input" id="customFile" name="myfile" (change)="onFileSelect($event)">
+        <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label>
+      </div>
+
+    </div>
+    <div class="sm:tw-w-1/2 tw-pr-4 tw-pl-4 tw-text-center">
+      <button
+        class="tw-inline-block tw-align-middle tw-text-center tw-select-none tw-border tw-font-normal tw-whitespace-no-wrap tw-rounded tw-py-1 tw-px-3 tw-leading-normal tw-no-underline tw-bg-blue-600 tw-text-white hover:tw-bg-blue-600"
+        type="submit">Upload</button>
+    </div>
+  </div>
+</form>
+
+<p-table #dt [value]="users" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25, 50]"
+  [globalFilterFields]="['name', 'email', 'address', 'phone', 'gender']" [filterDelay]="0"
+  [showCurrentPageReport]="true" [loading]="loading"
+  currentPageReportTemplate="Hiển thị {first} tới {last} trong {totalRecords} mục" [rowHover]="true">
   <ng-template pTemplate="caption">
     <div class="table-header">
       Danh Sách User
       <span class="p-input-icon-right">
         <i class="pi pi-search"></i>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-          placeholder="Tìm kiếm toàn bộ"
-        />
+        <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+          placeholder="Tìm kiếm toàn bộ" />
       </span>
     </div>
   </ng-template>
@@ -51,61 +58,36 @@
         Giới Tính<p-sortIcon field="gender"></p-sortIcon>
       </th>
 
-      <th></th>
+
     </tr>
     <tr>
       <th>
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'name', 'contains')"
-          placeholder="Tìm khách hàng"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'name', 'contains')"
+          placeholder="Tìm khách hàng" class="p-column-filter" />
       </th>
 
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'email', 'contains')"
-          placeholder="Tìm email"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'email', 'contains')"
+          placeholder="Tìm email" class="p-column-filter" />
       </th>
 
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'address', 'contains')"
-          placeholder="Tìm địa chỉ"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'address', 'contains')"
+          placeholder="Tìm địa chỉ" class="p-column-filter" />
       </th>
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'phone', 'contains')"
-          placeholder="Tìm SĐT"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'phone', 'contains')"
+          placeholder="Tìm SĐT" class="p-column-filter" />
       </th>
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'gender', 'contains')"
-          placeholder="Giới Tính"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'gender', 'contains')"
+          placeholder="Giới Tính" class="p-column-filter" />
       </th>
-      <th></th>
-      <th></th>
+
+
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-product>

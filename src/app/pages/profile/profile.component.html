@@ -1,0 +1,114 @@
+<div class="tw-h-max tw-bg-white">
+  <form *ngIf="userForm" class="tw-w-full tw-max-w-lg tw-mx-auto tw-pt-5" [formGroup]="userForm">
+    <div class="tw-flex tw-flex-wrap tw--mx-3 tw-mb-6">
+      <div class="tw-w-full md:tw-w-1/2 tw-px-3 tw-mb-6 md:tw-mb-0">
+        <label class="tw-block tw-uppercase tw-tracking-wide tw-text-gray-700 tw-text-xs tw-font-bold tw-mb-2"
+          for="grid-name">
+          Tên
+        </label>
+        <input
+          class="tw-appearance-none tw-block tw-w-full tw-bg-gray-200 tw-text-gray-700 tw-border tw-border-gray-200 tw-rounded tw-py-3 tw-px-4 tw-leading-tight focus:tw-outline-none focus:tw-bg-white focus:tw-border-gray-500"
+          id="grid-name" type="text" placeholder="Nhập tên" formControlName="name" [readOnly]="isUpdate" />
+        <p *ngIf="error?.name" class="tw-text-red-500 tw-text-xs tw-italic">
+          {{ error.name }}
+        </p>
+      </div>
+      <div class="tw-w-full md:tw-w-1/2 tw-px-3">
+        <label class="tw-block tw-uppercase tw-tracking-wide tw-text-gray-700 tw-text-xs tw-font-bold tw-mb-2"
+          for="grid-phone">
+          SĐT
+        </label>
+        <input
+          class="tw-appearance-none tw-block tw-w-full tw-bg-gray-200 tw-text-gray-700 tw-border tw-border-gray-200 tw-rounded tw-py-3 tw-px-4 tw-leading-tight focus:tw-outline-none focus:tw-bg-white focus:tw-border-gray-500"
+          id="grid-phone" type="text" placeholder="Nhập SĐT" formControlName="phone" [readOnly]="isUpdate" />
+        <p *ngIf="error?.phone" class="tw-text-red-500 tw-text-xs tw-italic">
+          {{ error.phone }}
+        </p>
+      </div>
+    </div>
+    <div class="tw-flex tw-flex-wrap tw--mx-3 tw-mb-6">
+      <div class="tw-w-full tw-px-3">
+        <label class="tw-block tw-uppercase tw-tracking-wide tw-text-gray-700 tw-text-xs tw-font-bold tw-mb-2"
+          for="grid-email">
+          Email
+        </label>
+        <input
+          class="tw-appearance-none tw-block tw-w-full tw-bg-gray-200 tw-text-gray-700 tw-border tw-border-gray-200 tw-rounded tw-py-3 tw-px-4 tw-mb-3 tw-leading-tight focus:tw-outline-none focus:tw-bg-white focus:tw-border-gray-500"
+          id="grid-email" type="email" placeholder="test@test.com" formControlName="email" [readOnly]="isUpdate" />
+        <p *ngIf="error?.email" class="tw-text-red-500 tw-text-xs tw-italic">
+          {{ error.email }}
+        </p>
+      </div>
+    </div>
+    <div class="tw-flex tw-flex-wrap tw--mx-3 tw-mb-6">
+      <div class="tw-w-full tw-px-3">
+        <label class="tw-block tw-uppercase tw-tracking-wide tw-text-gray-700 tw-text-xs tw-font-bold tw-mb-2"
+          for="grid-password">
+          Password
+        </label>
+        <input
+          class="tw-appearance-none tw-block tw-w-full tw-bg-gray-200 tw-text-gray-700 tw-border tw-border-gray-200 tw-rounded tw-py-3 tw-px-4 tw-mb-3 tw-leading-tight focus:tw-outline-none focus:tw-bg-white focus:tw-border-gray-500"
+          id="grid-password-confirm" type="password" placeholder="******************" [readOnly]="isUpdate" />
+        <p *ngIf="error?.password" class="tw-text-red-500 tw-text-xs tw-italic">
+          {{ error.password }}
+        </p>
+      </div>
+    </div>
+    <div class="tw-flex tw-flex-wrap tw--mx-3 tw-mb-2">
+      <div class="tw-w-full md:tw-w-2/3 tw-px-3 tw-mb-6 md:tw-mb-0">
+        <label class="tw-block tw-uppercase tw-tracking-wide tw-text-gray-700 tw-text-xs tw-font-bold tw-mb-2"
+          for="grid-city">
+          Địa Chỉ
+        </label>
+        <input
+          class="tw-appearance-none tw-block tw-w-full tw-bg-gray-200 tw-text-gray-700 tw-border tw-border-gray-200 tw-rounded tw-py-3 tw-px-4 tw-leading-tight focus:tw-outline-none focus:tw-bg-white focus:tw-border-gray-500"
+          id="grid-city" type="text" placeholder="Nhập địa chỉ" formControlName="address" [readOnly]="isUpdate" />
+        <p *ngIf="error?.address" class="tw-text-red-500 tw-text-xs tw-italic">
+          {{ error.address }}
+        </p>
+      </div>
+      <div class="tw-w-full md:tw-w-1/3 tw-px-3 tw-mb-6 md:tw-mb-0">
+        <label class="tw-block tw-uppercase tw-tracking-wide tw-text-gray-700 tw-text-xs tw-font-bold tw-mb-2"
+          for="grid-state">
+          Giới tính
+        </label>
+        <div class="tw-relative" *ngIf="isUpdate">
+          <input
+            class="tw-appearance-none tw-block tw-w-full tw-bg-gray-200 tw-text-gray-700 tw-border tw-border-gray-200 tw-rounded tw-py-3 tw-px-4 tw-leading-tight focus:tw-outline-none focus:tw-bg-white focus:tw-border-gray-500"
+            id="grid-gender" type="text" formControlName="gender" [readOnly]="isUpdate" />
+        </div>
+        <div class="tw-relative" *ngIf="!isUpdate">
+          <select
+            class="tw-block tw-appearance-none tw-w-full tw-bg-gray-200 tw-border tw-border-gray-200 tw-text-gray-700 tw-py-3 tw-px-4 tw-pr-8 tw-rounded tw-leading-tight focus:tw-outline-none focus:tw-bg-white focus:tw-border-gray-500"
+            id="grid-state" formControlName="gender">
+            <option value="male">Nam</option>
+            <option value="female">Nữ</option>
+          </select>
+          <p *ngIf="error?.gender" class="tw-text-red-500 tw-text-xs tw-italic">
+            {{ error.gender }}
+          </p>
+
+          <div
+            class="tw-pointer-events-none tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-px-2 tw-text-gray-700">
+            <svg class="tw-fill-current tw-h-4 tw-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tw-flex tw-flex-wrap tw--mx-3 tw-pb-5">
+      <div *ngIf="!isUpdate"
+        class="tw-shadow tw-w-24 tw-text-center tw-cursor-pointer tw-mt-6 tw-mx-auto tw-bg-purple-500 hover:tw-bg-purple-400 focus:tw-shadow-outline focus:tw-outline-none tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded"
+        (click)="cancel()">
+        Hủy
+      </div>
+      <div
+        class="tw-shadow tw-cursor-pointer tw-mt-6 tw-mx-auto tw-bg-purple-500 hover:tw-bg-purple-400 focus:tw-shadow-outline focus:tw-outline-none tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded"
+        (click)="editUser()">
+        {{ labelButton }}
+      </div>
+    </div>
+  </form>
+</div>
