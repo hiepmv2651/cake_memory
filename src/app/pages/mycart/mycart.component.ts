@@ -25,6 +25,7 @@ export class MycartComponent implements OnInit {
   price: any;
   sumPrice = 0;
   getCartList() {
+    this.sum = 0;
     this.cartUserService.getUserCart().subscribe((response) => {
       this.carts = response;
       this.loading = false;
@@ -81,6 +82,9 @@ export class MycartComponent implements OnInit {
           });
         }
       });
+
+    this.getCartList();
+    this.sum = 0;
   }
 
   show() {
@@ -146,6 +150,7 @@ export class MycartComponent implements OnInit {
         );
       },
     });
+    this.sum = 0;
   }
   sum: any;
 

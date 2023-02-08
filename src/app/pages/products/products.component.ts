@@ -13,7 +13,7 @@ import { PrimeNGConfig } from 'primeng/api';
 export class ProductsComponent implements OnInit {
   header!: string;
 
-  count: number = 0;
+  count: number = 1;
 
   price: any;
 
@@ -71,7 +71,7 @@ export class ProductsComponent implements OnInit {
 
   hide() {
     this.displayCard = false;
-    this.count = 0;
+    this.count = 1;
   }
 
   addCart() {
@@ -101,6 +101,14 @@ export class ProductsComponent implements OnInit {
   }
   sum!: number;
   priceCake() {
-    this.sum = this.count ? this.price?.price * this.count : 0;
+    if (this.count >= 1 && this.count <= 20) {
+      this.sum = this.count ? this.price?.price * this.count : 0;
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Số lượng phải trong khoảng từ 1 đến 20',
+      });
+    }
   }
 }
