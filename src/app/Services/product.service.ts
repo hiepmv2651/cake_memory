@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const productApi = 'http://127.0.0.1:8000/api/products';
+const editProductApi = 'http://127.0.0.1:8000/api/edit';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,7 +20,7 @@ export class ProductService {
   }
 
   editProduct(postData: any, id: number) {
-    return this.http.put<Product>(`${productApi}/${id}`, postData);
+    return this.http.post<Product>(`${editProductApi}/${id}`, postData);
   }
 
   addEditProduct(postData: any, selectedProduct: any) {

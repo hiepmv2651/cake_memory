@@ -1,3 +1,4 @@
+import { validateRequired, validateEmail } from 'src/app/validators';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
@@ -22,6 +23,9 @@ export class ProfileComponent {
   userForm: any;
 
   error: any;
+
+  required = validateRequired;
+  email = validateEmail;
 
   ngOnInit() {
     this.error = null;
@@ -62,7 +66,7 @@ export class ProfileComponent {
         }
       );
 
-      this.getUserProfile();
+      this.cancel();
     }
   }
 

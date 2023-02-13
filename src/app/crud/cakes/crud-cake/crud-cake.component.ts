@@ -6,13 +6,15 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CategoryService } from 'src/app/Services/category.service';
 import { Category } from 'src/app/models/category';
 import { Store, select } from '@ngrx/store';
 import { errorMessageSelect, successMessageSelect } from '../cakes.selector';
 import { skip, take } from 'rxjs';
+
+import { validateRequired, validateMinLength } from '../../../validators';
 
 @Component({
   selector: 'app-crud-cake',
@@ -26,18 +28,21 @@ export class CrudCakeComponent {
 
   modalType = 'Thêm';
 
+  required = validateRequired;
+  minLength = validateMinLength;
+
   error: any;
   error$: any;
 
   categories!: Category[];
 
   productForm: any = this.fb.group({
-    name: ['', Validators.required],
-    price: [0, Validators.required],
+    name: [''],
+    price: [0],
     detail: [''],
-    category_id: ['', Validators.required],
-    image: ['', Validators.required],
-    quantity: ['', Validators.required],
+    category_id: [''],
+    image: [''],
+    quantity: [''],
   });
   constructor(
     public fb: FormBuilder,
@@ -73,61 +78,70 @@ export class CrudCakeComponent {
   }
 
   submitForm() {
-    this.error$ = undefined;
-    this.error = undefined;
+    if (!this.productForm.invalid) {
+      this.error$ = undefined;
+      this.error = undefined;
 
-    const formData = new FormData();
-    formData.append('image', this.productForm.get('image').value);
-    formData.append('name', this.productForm.get('name').value);
-    formData.append('price', this.productForm.get('price').value);
-    formData.append('detail', this.productForm.get('detail').value);
-    formData.append('category_id', this.productForm.get('category_id').value);
-    formData.append('quantity', this.productForm.get('quantity').value);
+      const formData = new FormData();
 
-    if (this.modalType === 'Thêm') {
-      this.store.dispatch(addCake({ payload: formData }));
-    } else {
-      this.store.dispatch(
-        updateCake({
-          payload: formData,
-          id: this.selectedProduct.id,
-        })
-      );
-    }
+      formData.append('image', this.productForm.get('image').value);
+      formData.append('name', this.productForm.get('name').value);
+      formData.append('price', this.productForm.get('price').value);
+      formData.append('detail', this.productForm.get('detail').value);
+      formData.append('category_id', this.productForm.get('category_id').value);
+      formData.append('quantity', this.productForm.get('quantity').value);
 
-    this.store
-      .pipe(select(successMessageSelect), take(2), skip(1))
-      .subscribe((error) => {
-        if (error === 'Thêm Thành Công' || error === 'Sửa Thành Công') {
-          this.error$ = error;
-          this.closeModal();
-        } else {
-          this.error$ = undefined;
+      if (this.modalType === 'Thêm') {
+        this.store.dispatch(addCake({ payload: formData }));
+      } else {
+        this.store.dispatch(
+          updateCake({
+            payload: formData,
+            id: this.selectedProduct.id,
+          })
+        );
+      }
+
+      this.store
+        .pipe(select(successMessageSelect), take(2), skip(1))
+        .subscribe((error) => {
+          if (error === 'Thêm Thành Công' || error === 'Sửa Thành Công') {
+            this.error$ = error;
+            this.closeModal();
+          } else {
+            this.error$ = undefined;
+          }
+        });
+
+      this.store
+        .pipe(select(errorMessageSelect), take(2), skip(1))
+        .subscribe((error) => {
+          if (error) this.error = error;
+        });
+
+      setTimeout(() => {
+        if (this.error) {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Lỗi',
+          });
         }
+        if (this.error$) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: this.error$,
+          });
+        }
+      }, 500);
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Vui lòng nhập đầy đủ thông tin',
       });
-
-    this.store
-      .pipe(select(errorMessageSelect), take(2), skip(1))
-      .subscribe((error) => {
-        if (error) this.error = error;
-      });
-
-    setTimeout(() => {
-      if (this.error) {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Lỗi',
-        });
-      }
-      if (this.error$) {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: this.error$,
-        });
-      }
-    }, 500);
+    }
   }
 
   onFileSelect(event: any) {

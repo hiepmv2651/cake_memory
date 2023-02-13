@@ -1,0 +1,16 @@
+<label class="block {{styleSelect}}">{{label}}</label>
+<select
+  class="tw-bg-white tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-blue-500 focus:tw-border-blue-500 tw-block tw-w-1/2 tw-p-2.5"
+  [formControl]="formControl" (input)="onChange(formControl.value)" (blur)="onTouched()">
+  <option class="{{styleInput}}" selected>{{label}}</option>
+  <option class="{{styleInput}}" [value]="item.id" *ngFor="let item of selectData">
+    {{ item.name }}
+  </option>
+</select>
+
+<small class="p-error block" *ngIf="isInvalid">
+  <p class="error-message">{{ errorMessage }}</p>
+</small>
+<div *ngIf="error" class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg" role="alert">
+  <span class="tw-font-medium"></span> {{ error }}
+</div>

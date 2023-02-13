@@ -57,7 +57,6 @@ export class UserComponent {
   onFileSelect(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      // console.log(file);
 
       this.fileInputLabel = file.name;
       this.fileUploadForm.get('file')?.setValue(file);
@@ -69,14 +68,7 @@ export class UserComponent {
     formData.append('file', this.fileUploadForm.get('file')?.value);
     formData.append('agentId', '007');
 
-    this.http.post<any>(this.SERVER_URL, formData).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.http.post<any>(this.SERVER_URL, formData);
     this.getUserList();
   }
 }

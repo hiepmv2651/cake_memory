@@ -59,6 +59,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CartEffect } from './crud/cart/cart.effect';
 import { ProfileComponent } from './pages/profile/profile.component';
 
+import { InputTextComponent } from './custom/input-text/input-text.component';
+import { InputNumberComponent } from './custom/input-number/input-number.component';
+import { InputSelectComponent } from './custom/input-select/input-select.component';
+import { InputTextareaComponent } from './custom/input-textarea/input-textarea.component';
+import { InputPasswordComponent } from './custom/input-password/input-password.component';
+import { InputTextTwComponent } from './custom/input-text-tw/input-text-tw.component';
+import { InputPasswordTwComponent } from './custom/input-password-tw/input-password-tw.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +89,14 @@ import { ProfileComponent } from './pages/profile/profile.component';
     RegisterComponent,
     MycartComponent,
     ProfileComponent,
+
+    InputTextComponent,
+     InputNumberComponent,
+     InputSelectComponent,
+     InputTextareaComponent,
+     InputPasswordComponent,
+     InputTextTwComponent,
+     InputPasswordTwComponent,
   ],
   imports: [
     BrowserModule,

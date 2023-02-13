@@ -4,7 +4,7 @@ import {
   successMessageSelector,
 } from './../cart.selector';
 import { UserService } from './../../../Services/user.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Product } from './../../../models/product';
 import {
   Component,
@@ -18,6 +18,7 @@ import { MessageService } from 'primeng/api';
 import { User } from 'src/app/models/user';
 import { Store, select } from '@ngrx/store';
 import { addCart, updateCart } from '../cart.action';
+import { validateRequired } from 'src/app/validators';
 
 @Component({
   selector: 'app-crud-cart',
@@ -38,10 +39,12 @@ export class CrudCartComponent {
 
   users!: User[];
 
-  cartForm = this.fb.group({
-    product_id: ['', Validators.required],
-    user_id: ['', Validators.required],
-    quantity: [0, Validators.required],
+  required = validateRequired;
+
+  cartForm: any = this.fb.group({
+    product_id: [''],
+    user_id: [''],
+    quantity: [0],
   });
 
   constructor(
@@ -86,47 +89,55 @@ export class CrudCartComponent {
   }
 
   addEditCart() {
-    this.error$ = undefined;
-    this.error = undefined;
-    if (this.modalType === 'Thêm') {
-      this.store.dispatch(addCart({ payload: this.cartForm.value }));
-    } else {
-      this.store.dispatch(
-        updateCart({ payload: this.cartForm.value, id: this.selectedCart.id })
-      );
-    }
-    this.store
-      .pipe(select(successMessageSelector), take(2), skip(1))
-      .subscribe((error) => {
-        if (error === 'Thêm Thành Công' || error === 'Sửa Thành Công') {
-          this.error = error;
-          this.closeModal();
-        } else {
-          this.error = undefined;
+    if (!this.cartForm.invalid) {
+      this.error$ = undefined;
+      this.error = undefined;
+      if (this.modalType === 'Thêm') {
+        this.store.dispatch(addCart({ payload: this.cartForm.value }));
+      } else {
+        this.store.dispatch(
+          updateCart({ payload: this.cartForm.value, id: this.selectedCart.id })
+        );
+      }
+      this.store
+        .pipe(select(successMessageSelector), take(2), skip(1))
+        .subscribe((error) => {
+          if (error === 'Thêm Thành Công' || error === 'Sửa Thành Công') {
+            this.error = error;
+            this.closeModal();
+          } else {
+            this.error = undefined;
+          }
+        });
+
+      this.store
+        .pipe(select(errorMessageSelector), take(2), skip(1))
+        .subscribe((error) => {
+          if (error) this.error$ = error;
+        });
+
+      setTimeout(() => {
+        if (this.error$) {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Lỗi',
+          });
         }
+        if (this.error) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: this.error,
+          });
+        }
+      }, 500);
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Vui lòng nhập đầy đủ thông tin',
       });
-
-    this.store
-      .pipe(select(errorMessageSelector), take(2), skip(1))
-      .subscribe((error) => {
-        if (error) this.error$ = error;
-      });
-
-    setTimeout(() => {
-      if (this.error$) {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Lỗi',
-        });
-      }
-      if (this.error) {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: this.error,
-        });
-      }
-    }, 500);
+    }
   }
 }

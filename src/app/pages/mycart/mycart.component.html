@@ -1,35 +1,14 @@
-<p-table
-  #dt
-  [value]="carts"
-  [paginator]="true"
-  [rows]="5"
-  [rowsPerPageOptions]="[5, 10, 25, 50]"
-  [globalFilterFields]="['product_name', 'quantity', 'price']"
-  [filterDelay]="0"
-  [showCurrentPageReport]="true"
-  [loading]="loading"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  [rowHover]="true"
->
+<p-table #dt [value]="carts" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25, 50]"
+  [globalFilterFields]="['product_name', 'quantity', 'price']" [filterDelay]="0" [showCurrentPageReport]="true"
+  [loading]="loading" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowHover]="true">
   <ng-template pTemplate="caption">
     <div class="table-header">
       Danh Sách Giỏ Hàng
       <span class="p-input-icon-right">
         <i class="pi pi-search"></i>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-          placeholder="Tìm kiếm toàn bộ"
-        />
-        <button
-          pButton
-          pRipple
-          type="button"
-          label="Thanh Toán"
-          class="p-button-raised"
-          (click)="show()"
-        ></button>
+        <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+          placeholder="Tìm kiếm toàn bộ" />
+        <button pButton pRipple type="button" label="Thanh Toán" class="p-button-raised" (click)="show()"></button>
       </span>
     </div>
   </ng-template>
@@ -53,34 +32,18 @@
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="
+        <input pInputText type="text" (input)="
             dt.filter($any($event.target).value, 'product_name', 'contains')
-          "
-          placeholder="Tìm tên bánh"
-          class="p-column-filter"
-        />
+          " placeholder="Tìm tên bánh" class="p-column-filter" />
       </th>
 
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'quantity', 'contains')"
-          placeholder="Tìm số lượng"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'quantity', 'contains')"
+          placeholder="Tìm số lượng" class="p-column-filter" />
       </th>
       <th>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filter($any($event.target).value, 'price', 'contains')"
-          placeholder="Tìm giá tiền"
-          class="p-column-filter"
-        />
+        <input pInputText type="text" (input)="dt.filter($any($event.target).value, 'price', 'contains')"
+          placeholder="Tìm giá tiền" class="p-column-filter" />
       </th>
       <th></th>
     </tr>
@@ -95,18 +58,10 @@
       <td>{{ cart.price | currency : "USD" }}</td>
 
       <td>
-        <button
-          pButton
-          icon="pi pi-pencil"
-          class="p-button-rounded p-button-success mr-2"
-          (click)="showEditUserCart(cart)"
-        ></button>
-        <button
-          pButton
-          icon="pi pi-trash"
-          class="p-button-rounded p-button-warning"
-          (click)="deleteCart(cart)"
-        ></button>
+        <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+          (click)="showEditUserCart(cart)"></button>
+        <button pButton icon="pi pi-trash" class="p-button-rounded p-button-warning"
+          (click)="deleteCart(cart)"></button>
       </td>
     </tr>
   </ng-template>
@@ -123,18 +78,10 @@
 </p-table>
 
 <p-toast position="bottom-right"></p-toast>
-<p-dialog
-  header="Thanh Toán"
-  [(visible)]="displayCard"
-  [style]="{ width: '30vw' }"
-  (onHide)="hide()"
->
+<p-dialog header="Thanh Toán" [(visible)]="displayCard" [style]="{ width: '30vw' }" (onHide)="hide()">
   <form [formGroup]="payForm">
-    <div
-      *ngIf="errors?.status === 500"
-      class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
-      role="alert"
-    >
+    <div *ngIf="errors?.status === 500" class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
+      role="alert">
       <span class="tw-font-medium"></span> {{ errors?.message }}
     </div>
     <p class="my-3">Nhập mã thẻ:</p>
@@ -146,59 +93,37 @@
     <p class="my-3">CSV:</p>
     <p-inputNumber formControlName="cvc"></p-inputNumber>
     <p class="my-3">Số Tiền:</p>
-    <p-inputNumber
-      formControlName="amount"
-      [readonly]="true"
-      [(ngModel)]="sumPrice"
-    ></p-inputNumber>
+    <p-inputNumber formControlName="amount" [readonly]="true" [(ngModel)]="sumPrice"></p-inputNumber>
   </form>
 
   <ng-template pTemplate="footer">
-    <p-button
-      icon="pi pi-check"
-      label="Thanh Toán"
-      styleClass="p-button-text"
-      (onClick)="pay()"
-    ></p-button>
+    <p-button icon="pi pi-check" label="Thanh Toán" styleClass="p-button-text" (onClick)="pay()"></p-button>
   </ng-template>
 </p-dialog>
 
-<p-confirmDialog
-  header="Delete"
-  icon="pi pi-exclamation-triangle"
-></p-confirmDialog>
+<p-confirmDialog header="Delete" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-<p-dialog
-  header="{{ cartUser?.product_name }}"
-  [(visible)]="displayUserCart"
-  [style]="{ width: '30vw' }"
-  (onHide)="hideCart()"
->
-  <p-image
-    src="https://wallpaperaccess.com/full/986759.jpg"
-    alt="Image"
-    width="250"
-    class="tw-flex tw-justify-center"
-  ></p-image>
+<p-dialog header="{{ cartUser?.product_name }}" [(visible)]="displayUserCart" [style]="{ width: '30vw' }"
+  (onHide)="hideCart()" [formGroup]="quantityControl">
+  <p-image src="https://wallpaperaccess.com/full/986759.jpg" alt="Image" width="250"
+    class="tw-flex tw-justify-center"></p-image>
 
   <p class="my-3">Nhập số lượng:</p>
   <input
     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-    [(ngModel)]="count2"
-    (ngModelChange)="priceCake()"
-    [min]="1"
-    [max]="20"
-  />
+    [(ngModel)]="count2" (ngModelChange)="priceCake()" formControlName="quantity" [min]="1" [max]="20"
+    [value]="cartUser?.quantity" />
+  <small class="p-error block" *ngIf="quantityControl?.invalid && this.quantityControl?.touched">
+    <p class="error-message" *ngIf="quantityControl.controls.quantity.errors?.['required']">Không được để trống</p>
+    <p class="error-message" *ngIf="quantityControl.controls.quantity.errors?.['min']">Số lượng phải lớn hơn 1</p>
+    <p class="error-message" *ngIf="quantityControl.controls.quantity.errors?.['max']">Số lượng phải nhỏ hơn 20</p>
+  </small>
   <p class="mt-3">
     Số tiền:
     {{ sum | number : "0.0-2" }}
   </p>
   <ng-template pTemplate="footer">
-    <p-button
-      icon="pi pi-check"
-      label="Thêm vào giỏ"
-      styleClass="p-button-text"
-      (onClick)="editUserCart()"
-    ></p-button>
+    <p-button icon="pi pi-check" label="Thêm vào giỏ" styleClass="p-button-text" [loading]="quantityControl.invalid"
+      (onClick)="editUserCart()"></p-button>
   </ng-template>
 </p-dialog>

@@ -45,7 +45,7 @@
       </ul>
     </div>
 
-    <div class="tw-cursor-pointer" (click)="profile()">
+    <div class="tw-cursor-pointer tw-mr-8" (click)="profile()">
       {{ name | async }}
       <div *ngIf="displayProfile"
         class="tw-absolute tw-w-40 tw-px-5 tw-py-3 dark:tw-bg-gray-800 tw-bg-white tw-rounded-lg tw-shadow tw-border dark:tw-border-transparent tw-mt-5">
@@ -61,6 +61,20 @@
                 </svg>
               </div>
               Account
+            </a>
+          </li>
+
+          <li class="tw-font-medium">
+            <a (click)="changePass()"
+              class="tw-flex tw-items-center tw-transform tw-transition-colors tw-duration-200 tw-border-r-4 tw-border-transparent hover:tw-border-indigo-700">
+              <div class="tw-mr-3">
+                <svg class="tw-w-6 tw-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+              </div>
+              Change Password
             </a>
           </li>
 
@@ -104,3 +118,54 @@
   </div>
 </nav>
 <app-sidebar [visibleSidebar1]="visibleSidebar1" (clickClose)="clickClose()"></app-sidebar>
+
+<div *ngIf="modalPass"
+  class="tw-fixed tw-top-0 tw-left-0 tw-right-0 tw-mx-96 tw-my-20 tw-z-50 tw-w-full tw-p-4 tw-overflow-x-hidden tw-overflow-y-auto md:tw-inset-0 tw-h-modal md:tw-h-full">
+  <div class="tw-relative tw-w-full tw-h-full tw-max-w-md md:tw-h-auto">
+    <!-- Modal content -->
+    <div class="tw-relative tw-bg-white tw-rounded-lg tw-shadow dark:tw-bg-gray-700">
+      <button type="button" (click)="changePass()"
+        class="tw-absolute tw-top-3 tw-right-2.5 tw-text-gray-400 tw-bg-transparent hover:tw-bg-gray-200 hover:tw-text-gray-900 tw-rounded-lg tw-text-sm tw-p-1.5 tw-ml-auto tw-inline-flex tw-items-center dark:hover:tw-bg-gray-800 dark:hover:tw-text-white">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+        <span class="tw-sr-only">Close modal</span>
+      </button>
+      <div class="tw-px-6 tw-py-6 lg:tw-px-8">
+        <h3 class="tw-mb-4 tw-text-xl tw-font-medium tw-text-gray-900 dark:tw-text-white">Đổi mật khẩu</h3>
+        <form class="tw-space-y-6" [formGroup]="updatePassForm" (ngSubmit)="change()">
+
+          <app-input-password-tw label="Mật Khẩu Hiện Tại" placeHolder="••••••••" [validators]="[required]"
+            [formControl]="updatePassForm.get('current_password')"
+            [error]="error?.current_password"></app-input-password-tw>
+
+          <app-input-password-tw label="Mật Khẩu Mới" placeHolder="••••••••" [validators]="[required]"
+            [formControl]="updatePassForm.get('new_password')" [error]="error?.new_password"></app-input-password-tw>
+
+          <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Nhập lại mật
+            khẩu</label>
+          <input type="password" formControlName="confirm_new_password" placeholder="••••••••"
+            class="tw-bg-gray-50 tw-border tw-mb-5 tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-blue-500 focus:tw-border-blue-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-600 dark:tw-border-gray-500 dark:tw-placeholder-gray-400 dark:tw-text-black"
+            required>
+          <div class="tw-text-red-500 tw-text-xs tw-italic"
+            *ngIf="updatePassForm.controls.confirm_new_password.invalid && updatePassForm.controls.confirm_new_password.touched">
+            <div *ngIf="updatePassForm.hasError('required', 'confirm_new_password')">Nhập lại mật khẩu mới trống
+            </div>
+            <div *ngIf="updatePassForm.hasError('passwordsDoNotMatch', 'confirm_new_password')">Nhập lại mật khẩu
+              không đúng</div>
+          </div>
+
+
+          <button type="submit"
+            class="tw-w-full tw-text-white tw-bg-blue-700 hover:tw-bg-blue-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:tw-ring-blue-800">
+            Đổi mật khẩu</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast position="bottom-right"></p-toast>

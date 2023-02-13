@@ -22,6 +22,14 @@ export class MycartComponent implements OnInit {
   ngOnInit(): void {
     this.getCartList();
   }
+
+  quantityControl = this.fb.group({
+    quantity: [
+      '',
+      [Validators.required, Validators.min(1), Validators.max(20)],
+    ],
+  });
+
   price: any;
   sumPrice = 0;
   getCartList() {
@@ -100,7 +108,6 @@ export class MycartComponent implements OnInit {
     this.cartUser = cart;
     this.count1 = cart.quantity;
     this.price = cart.price;
-    console.log(this.price);
   }
 
   hideCart() {
@@ -110,20 +117,28 @@ export class MycartComponent implements OnInit {
   }
 
   editUserCart() {
-    this.edit = {
-      quantity: this.count2,
-    };
-    this.cartUserService
-      .editUserCart(this.cartUser.id, this.edit)
-      .subscribe((res) => {
-        this.getCartList();
-        this.hideCart();
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Cart update successfully',
+    if (!this.quantityControl.invalid) {
+      this.edit = {
+        quantity: this.count2,
+      };
+      this.cartUserService
+        .editUserCart(this.cartUser.id, this.edit)
+        .subscribe((res) => {
+          this.getCartList();
+          this.hideCart();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Cart update successfully',
+          });
         });
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Số lượng phải trong khoảng từ 1 đến 20',
       });
+    }
   }
 
   deleteCart(cart: Cart) {
@@ -156,6 +171,5 @@ export class MycartComponent implements OnInit {
 
   priceCake() {
     this.sum = (this.price / this.count1) * this.count2;
-    console.log(this.sum);
   }
 }

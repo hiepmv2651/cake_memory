@@ -1,9 +1,6 @@
-<div
-  class="surface-ground flex align-items-center justify-content-center min-h-screen overflow-hidden"
->
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen overflow-hidden">
   <div class="flex flex-column align-items-center justify-content-center m-5">
-    <div
-      style="
+    <div style="
         border-radius: 56px;
         padding: 0.3rem;
         background: linear-gradient(
@@ -11,12 +8,8 @@
           var(--primary-color) 10%,
           rgba(33, 150, 243, 0) 30%
         );
-      "
-    >
-      <div
-        class="w-full surface-card py-8 px-5 sm:px-8"
-        style="border-radius: 53px"
-      >
+      ">
+      <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
         <div class="text-center mb-5">
           <div class="text-900 text-3xl font-medium mb-3">
             Chào mừng đến Cake Memory
@@ -25,52 +18,14 @@
         </div>
 
         <form [formGroup]="loginForm">
-          <label for="email1" class="block text-900 text-xl font-medium mb-2"
-            >Email</label
-          >
-          <input
-            id="email1"
-            type="text"
-            placeholder="Email"
-            pInputText
-            class="w-full md:w-30rem mb-3"
-            style="padding: 1rem"
-            formControlName="email"
-          />
-          <div
-            *ngIf="error?.email"
-            class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
-            role="alert"
-          >
-            <span class="tw-font-medium"></span> {{ error.email }}
-          </div>
+          <app-input-text label="Email" styleLabel="text-900 text-xl font-medium mb-2" placeHolder="Email"
+            styleInput="w-full md:w-30rem mb-3 p-3" [validators]="[required, email]"
+            [formControl]="loginForm.get('email')" [error]="error?.email"></app-input-text>
 
-          <label for="password1" class="block text-900 font-medium text-xl mb-2"
-            >Password</label
-          >
-          <p-password
-            id="password1"
-            [feedback]="false"
-            placeholder="Password"
-            [toggleMask]="true"
-            styleClass="mb-3"
-            inputStyleClass="w-full p-3 md:w-30rem"
-            formControlName="password"
-          ></p-password>
-          <div
-            *ngIf="error?.password"
-            class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg"
-            role="alert"
-          >
-            <span class="tw-font-medium"></span> {{ error.password }}
-          </div>
-          <button
-            pButton
-            pRipple
-            label="Đăng Nhập"
-            class="w-full p-3 text-xl flex mt-5"
-            (click)="click()"
-          ></button>
+          <app-input-password label="Nhập Mật Khẩu" styleLabel="block text-900 text-xl font-medium mb-2"
+            placeHolder="Nhập mật khẩu" styleInput="w-full md:w-30rem mb-3 p-3" [validators]="[required]"
+            [formControl]="loginForm.get('password')" [error]="error?.password"></app-input-password>
+          <button pButton label="Đăng Nhập" class="w-full p-3 text-xl flex mt-5" (click)="click()"></button>
         </form>
       </div>
     </div>

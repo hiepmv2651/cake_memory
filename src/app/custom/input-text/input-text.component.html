@@ -1,0 +1,10 @@
+<label class="block {{styleLabel}}">{{label}}</label>
+<input type="text" pInputText class="{{styleInput}}" placeholder="{{placeHolder}}" [formControl]="formControl"
+  (input)="onChange(formControl.value)" (blur)="onTouched()" />
+
+<small class="p-error block" *ngIf="isInvalid">
+  <p class="error-message">{{ errorMessage }}</p>
+</small>
+<div *ngIf="error" class="tw-p-4 tw-mb-4 tw-text-sm tw-text-red-700 tw-bg-red-100 tw-rounded-lg" role="alert">
+  <span class="tw-font-medium"></span> {{ error }}
+</div>
