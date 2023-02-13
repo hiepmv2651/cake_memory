@@ -33,7 +33,7 @@ export class MycartComponent implements OnInit {
   price: any;
   sumPrice = 0;
   getCartList() {
-    this.sum = 0;
+    this.sumPrice = 0;
     this.cartUserService.getUserCart().subscribe((response) => {
       this.carts = response;
       this.loading = false;
@@ -70,7 +70,10 @@ export class MycartComponent implements OnInit {
 
   errors: any;
 
+  loadingPage = false;
+
   pay() {
+    this.loadingPage = true;
     this.cartUserService
       .payUserCart(this.payForm.value)
       .subscribe((response) => {
@@ -89,6 +92,7 @@ export class MycartComponent implements OnInit {
             detail: this.errors?.message,
           });
         }
+        this.loadingPage = false;
       });
 
     this.getCartList();
@@ -165,7 +169,6 @@ export class MycartComponent implements OnInit {
         );
       },
     });
-    this.sum = 0;
   }
   sum: any;
 
