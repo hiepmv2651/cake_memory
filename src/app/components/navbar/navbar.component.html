@@ -142,22 +142,13 @@
             [formControl]="updatePassForm.get('current_password')"
             [error]="error?.current_password"></app-input-password-tw>
 
-          <app-input-password-tw label="Mật Khẩu Mới" placeHolder="••••••••" [validators]="[required]"
-            [formControl]="updatePassForm.get('new_password')" [error]="error?.new_password"></app-input-password-tw>
+          <app-input-password-tw label="Mật Khẩu Mới" placeHolder="••••••••" [validators]="[required, password]"
+            [formControl]="updatePassForm.get('password')" [error]="error?.password"></app-input-password-tw>
 
-          <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Nhập lại mật
-            khẩu</label>
-          <input type="password" formControlName="confirm_new_password" placeholder="••••••••"
-            class="tw-bg-gray-50 tw-border tw-mb-5 tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-blue-500 focus:tw-border-blue-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-600 dark:tw-border-gray-500 dark:tw-placeholder-gray-400 dark:tw-text-black"
-            required>
-          <div class="tw-text-red-500 tw-text-xs tw-italic"
-            *ngIf="updatePassForm.controls.confirm_new_password.invalid && updatePassForm.controls.confirm_new_password.touched">
-            <div *ngIf="updatePassForm.hasError('required', 'confirm_new_password')">Nhập lại mật khẩu mới trống
-            </div>
-            <div *ngIf="updatePassForm.hasError('passwordsDoNotMatch', 'confirm_new_password')">Nhập lại mật khẩu
-              không đúng</div>
-          </div>
-
+          <app-input-password-tw label="Nhập lại mật
+          khẩu" placeHolder="••••••••" [validators]="[required, cpassword]"
+            [formControl]="updatePassForm.get('password_confirmation')"
+            [error]="error?.password_confirmation"></app-input-password-tw>
 
           <button type="submit"
             class="tw-w-full tw-text-white tw-bg-blue-700 hover:tw-bg-blue-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:tw-ring-blue-800">

@@ -8,6 +8,7 @@ import {
   validateEmail,
   validateNumber,
   validatePassword,
+  validateConfirmPassword,
 } from 'src/app/validators';
 
 @Component({
@@ -36,6 +37,7 @@ export class RegisterComponent {
   email = validateEmail;
   number = validateNumber;
   password = validatePassword;
+  cpassword = validateConfirmPassword;
 
   token!: any;
 

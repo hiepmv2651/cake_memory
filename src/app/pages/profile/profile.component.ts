@@ -14,6 +14,15 @@ export class ProfileComponent {
     'id'
   )}`;
 
+  gt = [
+    {
+      name: 'male',
+    },
+    {
+      name: 'female',
+    },
+  ];
+
   name = this.userService.userName;
 
   isUpdate: boolean = true;
@@ -51,22 +60,26 @@ export class ProfileComponent {
   }
 
   editUser() {
-    this.error = null;
-    if (this.labelButton === 'Chỉnh sửa') {
-      this.isUpdate = false;
-      this.labelButton = 'Cập nhật';
-    } else {
-      this.http.put<any>(this.userProfileApi, this.userForm.value).subscribe(
-        (data) => {
-          localStorage.setItem('name', this.userForm.value.name);
-          this.name.next(this.userForm.value.name);
-        },
-        (error) => {
-          this.error = error.error.errors;
-        }
-      );
+    if (!this.userForm.invalid) {
+      this.error = null;
+      if (this.labelButton === 'Chỉnh sửa') {
+        this.isUpdate = false;
+        this.labelButton = 'Cập nhật';
+      } else {
+        this.http.put<any>(this.userProfileApi, this.userForm.value).subscribe(
+          (data) => {
+            localStorage.setItem('name', this.userForm.value.name);
+            this.name.next(this.userForm.value.name);
+          },
+          (error) => {
+            this.error = error.error.errors;
+          }
+        );
 
-      this.cancel();
+        this.cancel();
+      }
+    } else {
+      this.error = 'Vui lòng nhập đầy đủ thông tin';
     }
   }
 

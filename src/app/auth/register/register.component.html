@@ -43,7 +43,7 @@
             [formControl]="registerForm.get('password')" [error]="error?.password"></app-input-password>
 
           <app-input-password label="Nhập Lại Mật Khẩu" styleLabel="block text-900 text-xl font-medium mb-2"
-            placeHolder="Nhập lại mật khẩu" styleInput="w-full md:w-30rem mb-3 p-3" [validators]="[required, password]"
+            placeHolder="Nhập lại mật khẩu" styleInput="w-full md:w-30rem mb-3 p-3" [validators]="[required, cpassword]"
             [formControl]="registerForm.get('password_confirmation')"
             [error]="error?.password_confirmation"></app-input-password>
 

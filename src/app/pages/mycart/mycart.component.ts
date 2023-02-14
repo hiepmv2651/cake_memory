@@ -73,30 +73,38 @@ export class MycartComponent implements OnInit {
   loadingPage = false;
 
   pay() {
-    this.loadingPage = true;
-    this.cartUserService
-      .payUserCart(this.payForm.value)
-      .subscribe((response) => {
-        this.errors = response;
-        if (this.errors?.status === 201) {
-          this.hide();
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: this.errors?.message,
-          });
-        } else {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: this.errors?.message,
-          });
-        }
-        this.loadingPage = false;
-      });
+    if (!this.payForm.invalid) {
+      this.loadingPage = true;
+      this.cartUserService
+        .payUserCart(this.payForm.value)
+        .subscribe((response) => {
+          this.errors = response;
+          if (this.errors?.status === 201) {
+            this.hide();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: this.errors?.message,
+            });
+          } else {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: this.errors?.message,
+            });
+          }
+          this.loadingPage = false;
+        });
 
-    this.getCartList();
-    this.sum = 0;
+      this.getCartList();
+      this.sum = 0;
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Vui lòng nhập đầy đủ thông tin',
+      });
+    }
   }
 
   show() {

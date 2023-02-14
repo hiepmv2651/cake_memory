@@ -29,7 +29,7 @@ export class CrudCakeComponent {
   modalType = 'Thêm';
 
   required = validateRequired;
-  minLength = validateMinLength;
+  minLength = validateMinLength(3);
 
   error: any;
   error$: any;

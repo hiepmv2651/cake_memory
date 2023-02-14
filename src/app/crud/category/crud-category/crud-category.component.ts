@@ -33,7 +33,7 @@ export class CrudCategoryComponent {
   error$: any;
 
   required = validateRequired;
-  minLength = validateMinLength;
+  minLength = validateMinLength(3);
 
   categoryForm: any = this.fb.group({
     name: [''],

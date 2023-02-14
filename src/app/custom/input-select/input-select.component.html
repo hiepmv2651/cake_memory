@@ -2,7 +2,7 @@
 <select
   class="tw-bg-white tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-blue-500 focus:tw-border-blue-500 tw-block tw-w-1/2 tw-p-2.5"
   [formControl]="formControl" (input)="onChange(formControl.value)" (blur)="onTouched()">
-  <option class="{{styleInput}}" selected>{{label}}</option>
+
   <option class="{{styleInput}}" [value]="item.id" *ngFor="let item of selectData">
     {{ item.name }}
   </option>

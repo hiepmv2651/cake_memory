@@ -56,6 +56,8 @@ export class InputPasswordComponent implements ControlValueAccessor, Validator {
         return `${this.label} is required`;
       } else if (this.formControl.errors?.['pattern']) {
         return `${this.label} must contain at least one uppercase letter, one lowercase letter, one special letter, and one number.`;
+      } else if (this.formControl.errors?.['notMatch']) {
+        return 'Password and Confirm Password must be the same';
       }
     }
     return '';

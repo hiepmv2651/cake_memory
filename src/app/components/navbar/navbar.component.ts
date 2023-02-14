@@ -1,4 +1,8 @@
-import { validateRequired } from 'src/app/validators';
+import {
+  validateConfirmPassword,
+  validatePassword,
+  validateRequired,
+} from 'src/app/validators';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -30,6 +34,8 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   required = validateRequired;
+  password = validatePassword;
+  cpassword = validateConfirmPassword;
 
   ngOnInit(): void {}
 
@@ -37,25 +43,9 @@ export class NavbarComponent implements OnInit {
 
   updatePassForm: any = this.fb.group({
     current_password: [''],
-    new_password: [''],
-    confirm_new_password: [
-      '',
-      [Validators.required, this.matchPassword.bind(this)],
-    ],
+    password: [''],
+    password_confirmation: [''],
   });
-
-  matchPassword(formControl: FormControl): { [key: string]: boolean } {
-    if (this.updatePassForm) {
-      const password = this.updatePassForm.controls.new_password.value;
-      const confirmPassword = formControl.value;
-
-      if (password !== confirmPassword) {
-        return { passwordsDoNotMatch: true };
-      }
-    }
-
-    return null as any;
-  }
 
   logout() {
     this.name.next('');
@@ -78,27 +68,35 @@ export class NavbarComponent implements OnInit {
   }
 
   change() {
-    this.http
-      .post<any>(
-        'http://127.0.0.1:8000/api/changpass',
-        this.updatePassForm.value
-      )
-      .subscribe(
-        (res) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Thành công',
-            detail: 'Đổi mật khẩu thành công',
-          });
-          this.modalPass = false;
-        },
-        (error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Thất bại',
-            detail: 'Đổi mật khẩu thất bại',
-          });
-        }
-      );
+    if (!this.updatePassForm.invalid) {
+      this.http
+        .post<any>(
+          'http://127.0.0.1:8000/api/changpass',
+          this.updatePassForm.value
+        )
+        .subscribe(
+          (res) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Thành công',
+              detail: 'Đổi mật khẩu thành công',
+            });
+            this.modalPass = false;
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Thất bại',
+              detail: 'Đổi mật khẩu thất bại',
+            });
+          }
+        );
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Thất bại',
+        detail: 'Đổi mật khẩu thất bại',
+      });
+    }
   }
 }

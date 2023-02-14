@@ -46,7 +46,7 @@ export class LoginComponent {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: error,
+            detail: 'Sai tài khoản hoặc mật khẩu',
           });
           this.error = error.error.errors;
         }
